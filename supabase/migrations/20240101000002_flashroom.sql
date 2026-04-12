@@ -164,3 +164,6 @@ create policy "Owners read reports" on public.reported_messages for select using
 alter table public.sessions
   add column if not exists message_count int default 0,
   add column if not exists peak_participants int default 0;
+
+-- Add pinned column to messages
+alter table public.messages add column if not exists pinned boolean default false;
