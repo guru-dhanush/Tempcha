@@ -1,33 +1,35 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { ReactNode } from 'react';
-import { DashboardGradient } from '@/components/gradients/dashboard-gradient';
+import { Zap } from 'lucide-react';
 import '../../../styles/dashboard.css';
 import { Sidebar } from '@/components/dashboard/layout/sidebar';
 import { SidebarUserInfo } from '@/components/dashboard/layout/sidebar-user-info';
 
-interface Props {
-  children: ReactNode;
-}
+interface Props { children: ReactNode; }
 
 export function DashboardLayout({ children }: Props) {
   return (
-    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] relative overflow-hidden">
-      <DashboardGradient />
-      <div className="hidden border-r md:block relative">
-        <div className="flex h-full flex-col gap-2">
-          <div className="flex items-center pt-8 pl-6 pb-10">
-            <Link href="/" className="flex items-center gap-2 font-semibold">
-              <Image src={'/assets/icons/logo/aeroedit-logo-icon.svg'} alt={'AeroEdit'} width={41} height={41} />
-            </Link>
-          </div>
-          <div className="flex flex-col grow">
-            <Sidebar />
-            <SidebarUserInfo />
-          </div>
+    <div className="grid min-h-screen w-full md:grid-cols-[240px_1fr] relative overflow-hidden" style={{background:'hsl(224 30% 5%)'}}>
+      {/* Ambient orb */}
+      <div className="orb orb-purple w-[500px] h-[500px] top-0 left-0 opacity-30 pointer-events-none fixed" />
+
+      {/* Sidebar */}
+      <div className="hidden border-r md:flex flex-col relative" style={{borderColor:'hsl(224 20% 11%)'}}>
+        <div className="flex items-center px-6 py-6 border-b" style={{borderColor:'hsl(224 20% 11%)'}}>
+          <Link href="/" className="flex items-center gap-2 font-bold text-lg">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{background:'linear-gradient(135deg, hsl(258 100% 65%), hsl(220 100% 60%))'}}>
+              <Zap className="w-3.5 h-3.5 text-white" />
+            </div>
+            Flash<span className="glow-text">Room</span>
+          </Link>
+        </div>
+        <div className="flex flex-col grow py-4">
+          <Sidebar />
+          <SidebarUserInfo />
         </div>
       </div>
-      <div className="flex flex-col">{children}</div>
+
+      <div className="flex flex-col relative z-10">{children}</div>
     </div>
   );
 }
