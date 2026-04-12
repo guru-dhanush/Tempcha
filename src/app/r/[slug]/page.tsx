@@ -1,49 +1,42 @@
+export const dynamic = 'force-dynamic';
+
 import { createClient } from '@/utils/supabase/server';
 import { notFound } from 'next/navigation';
 import { ChatRoomClient } from '@/components/chat/chat-room-client';
+import type { Room, Session, Message } from '@/lib/types';
 
-export default async function RoomPage({ params }: { params: Promise<{ slug: string }> }) {
+interface RpcResult {
+  room: Room | null;
+  session: Session | null;
+  messages: Message[];
+}
+
+export default async function RoomPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const supabase = await createClient();
 
-  // Find room
-  const { data: room } = await supabase
-    .from('rooms')
-    .select('*')
-    .eq('slug', slug)
-    .eq('is_active', true)
-    .single();
+  // Single RPC call replaces 3 separate queries
+  const { data, error } = await supabase.rpc('rpc_get_room_by_slug', {
+    p_slug: slug,
+  });
 
-  if (!room) notFound();
-
-  // Find active session
-  const { data: session } = await supabase
-    .from('sessions')
-    .select('*')
-    .eq('room_id', room.id)
-    .is('closed_at', null)
-    .gte('closes_at', new Date().toISOString())
-    .order('opened_at', { ascending: false })
-    .limit(1)
-    .single();
-
-  // Load existing messages if session active
-  let messages: any[] = [];
-  if (session) {
-    const { data } = await supabase
-      .from('messages')
-      .select('*')
-      .eq('session_id', session.id)
-      .order('created_at', { ascending: true })
-      .limit(100);
-    messages = data ?? [];
+  if (error) {
+    console.error('[RoomPage]', error);
+    notFound();
   }
+
+  const result = data as RpcResult | null;
+  if (!result?.room) notFound();
 
   return (
     <ChatRoomClient
-      room={room}
-      session={session ?? null}
-      initialMessages={messages}
+      room={result.room}
+      session={result.session ?? null}
+      initialMessages={result.messages ?? []}
     />
   );
 }
