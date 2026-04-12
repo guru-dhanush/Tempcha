@@ -5,10 +5,10 @@ import type { Metadata } from 'next';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://flashroom.io'),
-  title: 'FlashRoom — QR-Powered Temporary Chat',
+  metadataBase: new URL('https://paddle-billing.vercel.app'),
+  title: 'AeroEdit',
   description:
-    'Scan a QR code, chat instantly, leave nothing behind. FlashRoom creates ephemeral group chat rooms for businesses — no app, no signup, no permanent data.',
+    'AeroEdit is a powerful team design collaboration app and image editor. With plans for businesses of all sizes, streamline your workflow with real-time collaboration, advanced editing tools, and seamless project management.',
 };
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={'min-h-full dark'}>
-      <body className="font-sans">
+      <body>
         {children}
         <Toaster />
       </body>

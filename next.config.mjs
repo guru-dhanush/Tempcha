@@ -3,7 +3,7 @@ const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   images: {
-    domains: ['cdn.simpleicons.org', 'localhost', 'paddle-billing.vercel.app', 'flashroom.io'],
+    domains: ['cdn.simpleicons.org', 'localhost', 'paddle-billing.vercel.app'],
   },
 };
 
