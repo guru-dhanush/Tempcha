@@ -3,6 +3,7 @@ import '../styles/layout.css';
 import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Toaster } from '@/components/ui/toaster';
+import { Toaster as Sonner } from 'sonner';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://paddle-billing.vercel.app'),
@@ -14,15 +15,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={'min-h-full dark'}>
+    <html lang="en" className="min-h-full dark">
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#7C3AED" />
       </head>
       <body>
         {children}
         <Toaster />
+        <Sonner richColors position="top-center" />
       </body>
     </html>
   );

@@ -317,3 +317,6 @@ export function AdminRoomView({ room, session, initialMessages, reports, allSess
     </div>
   );
 }
+
+// Participant list and kick functionality is in the live tab sidebar
+// Extended with kick via /api/sessions/[id]/kick POST
