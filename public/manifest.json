@@ -1,0 +1,13 @@
+{
+  "name": "FlashRoom",
+  "short_name": "FlashRoom",
+  "description": "Scan. Chat. Disappear.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#7C3AED",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

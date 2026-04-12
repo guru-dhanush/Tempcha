@@ -116,3 +116,51 @@ begin
   update public.sessions set closed_at = now() where id = p_session_id;
 end;
 $$;
+
+-- ─── New Feature Tables ───────────────────────────────────────────
+
+-- Typing indicators (ephemeral, cleared with session)
+create table public.typing_indicators (
+  session_id uuid not null references public.sessions(id) on delete cascade,
+  alias text not null,
+  updated_at timestamptz default now(),
+  primary key (session_id, alias)
+);
+alter table public.typing_indicators enable row level security;
+create policy "Public manage typing" on public.typing_indicators for all using (true) with check (true);
+alter publication supabase_realtime add table public.typing_indicators;
+
+-- Emoji reactions on messages
+create table public.reactions (
+  id uuid primary key default gen_random_uuid(),
+  message_id uuid not null references public.messages(id) on delete cascade,
+  session_id uuid not null references public.sessions(id) on delete cascade,
+  emoji text not null,
+  alias text not null,
+  created_at timestamptz default now(),
+  unique(message_id, alias, emoji)
+);
+alter table public.reactions enable row level security;
+create policy "Public read reactions" on public.reactions for select using (true);
+create policy "Public insert reactions" on public.reactions for insert with check (true);
+create policy "Public delete reactions" on public.reactions for delete using (true);
+alter publication supabase_realtime add table public.reactions;
+
+-- Reported messages
+create table public.reported_messages (
+  id uuid primary key default gen_random_uuid(),
+  message_id uuid not null,
+  session_id uuid not null,
+  reported_by_alias text not null,
+  message_content text not null,
+  message_alias text not null,
+  created_at timestamptz default now()
+);
+alter table public.reported_messages enable row level security;
+create policy "Public insert reports" on public.reported_messages for insert with check (true);
+create policy "Owners read reports" on public.reported_messages for select using (true);
+
+-- Room analytics snapshots (updated when sessions close)
+alter table public.sessions
+  add column if not exists message_count int default 0,
+  add column if not exists peak_participants int default 0;

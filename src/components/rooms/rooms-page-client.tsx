@@ -199,7 +199,7 @@ export function RoomsPageClient({ rooms: initialRooms, userId }: Props) {
                     <div className="absolute right-0 top-full mt-1 z-50 rounded-xl overflow-hidden min-w-36"
                       style={{ background: 'hsl(224 25% 10%)', border: '1px solid hsl(224 20% 16%)' }}>
                       <a
-                        href={`/r/${room.slug}`}
+                        href={`/dashboard/rooms/${room.id}`}
                         target="_blank"
                         className="flex items-center gap-2 px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
                       >
