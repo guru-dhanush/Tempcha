@@ -67,8 +67,9 @@ export function CreateRoomModal({ onClose, onCreated }: Props) {
 
   return (
     <Dialog open onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
+      <DialogContent className="max-w-md flex flex-col max-h-[90vh] p-0 gap-0 overflow-hidden">
+        {/* Header — always visible */}
+        <DialogHeader className="px-6 pt-6 pb-4 border-b border-border shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center shrink-0">
               <QrCode className="w-4 h-4 text-muted-foreground" />
@@ -82,16 +83,15 @@ export function CreateRoomModal({ onClose, onCreated }: Props) {
           </div>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit}>
-          <div className="py-2">
+        <form onSubmit={handleSubmit} className="flex flex-col flex-1 min-h-0">
+          {/* Scrollable body */}
+          <div className="flex-1 overflow-y-auto px-6 py-5">
             <RoomFormFields values={values} onChange={handleChange} />
+            {error && <p className="text-sm text-destructive mt-4">{error}</p>}
           </div>
 
-          {error && (
-            <p className="text-sm text-destructive mt-3">{error}</p>
-          )}
-
-          <DialogFooter className="mt-6 gap-2">
+          {/* Footer — always visible */}
+          <DialogFooter className="px-6 py-4 border-t border-border shrink-0 gap-2">
             <Button type="button" variant="outline" onClick={onClose} className="flex-1">
               Cancel
             </Button>
