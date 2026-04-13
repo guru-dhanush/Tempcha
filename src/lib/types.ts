@@ -15,6 +15,9 @@ export interface Room {
   max_participants: number;
   created_at: string;
   updated_at: string;
+  room_type: RoomType;
+  retention_policy: RetentionPolicy;
+  participant_can_export: boolean;
 }
 
 export interface Session {
@@ -120,4 +123,43 @@ export interface AliasData {
 export interface SavedSession {
   alias: AliasData;
   token: string;
+}
+
+// ─── Private Conversation Types ────────────────────────────────────────────────
+
+export type RoomType = 'group' | 'private' | 'hybrid';
+export type RetentionPolicy = 'ephemeral' | '24h' | '7d' | 'permanent';
+export type ConversationStatus = 'open' | 'resolved' | 'assigned';
+
+export interface Conversation {
+  id: string;
+  session_id: string;
+  room_id: string;
+  participant_token: string;
+  participant_alias: string;
+  participant_color: string;
+  status: ConversationStatus;
+  assigned_to: string | null;
+  unread_count: number;
+  last_message_at: string | null;
+  last_message_preview: string | null;
+  created_at: string;
+  resolved_at: string | null;
+}
+
+export interface ConversationMessage {
+  id: string;
+  conversation_id: string;
+  content: string;
+  sender_type: 'participant' | 'staff';
+  sender_alias: string;
+  read_at: string | null;
+  created_at: string;
+}
+
+// Extend Room with new fields
+export interface RoomSettings {
+  room_type: RoomType;
+  retention_policy: RetentionPolicy;
+  participant_can_export: boolean;
 }

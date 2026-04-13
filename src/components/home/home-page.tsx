@@ -11,6 +11,7 @@ import { ExplainerSection } from '@/components/home/sections/explainer-section';
 import { UseCasesSection } from '@/components/home/sections/use-cases-section';
 import { HowItWorksSection } from '@/components/home/sections/how-it-works-section';
 import { TrustSection } from '@/components/home/sections/trust-section';
+import { ComparisonSection } from '@/components/home/sections/comparison-section';
 import { Pricing } from '@/components/home/pricing/pricing';
 import { HomePageBackground } from '@/components/gradients/home-page-background';
 import { Footer } from '@/components/home/footer/footer';
@@ -52,6 +53,11 @@ export function HomePage() {
 
         {/* Trust / Privacy */}
         <TrustSection />
+
+        <Separator className="footer-border mx-auto max-w-7xl" />
+
+        {/* Comparison */}
+        <ComparisonSection />
 
         <Separator className="footer-border mx-auto max-w-7xl" />
 
