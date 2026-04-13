@@ -3,8 +3,8 @@ interface Props {
 }
 
 /**
- * Small uppercase eyebrow label above section headings.
- * Matches design system — uses muted-foreground, existing text sizing.
+ * Eyebrow label above section headings.
+ * Matches the hero eyebrow: text-[13px] leading-[20px] font-medium tracking-[0.1em] uppercase
  */
 export function SectionLabel({ children }: Props) {
   return (

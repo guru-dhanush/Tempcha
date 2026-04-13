@@ -4,13 +4,13 @@ interface Props {
 }
 
 /**
- * Consistent h2 for all landing sections.
- * Mirrors hero h1 scale — medium weight, tight tracking.
+ * Section h2. Mirrors hero h1: font-medium, tracking-[-1.6px].
+ * The design system uses font-medium (NOT bold) for display headings.
  */
 export function SectionHeading({ children, className = '' }: Props) {
   return (
     <h2
-      className={`text-[36px] leading-[40px] md:text-[52px] md:leading-[56px] tracking-[-1px] font-medium ${className}`}
+      className={`text-[36px] leading-[40px] md:text-[56px] md:leading-[60px] tracking-[-1.6px] font-medium ${className}`}
     >
       {children}
     </h2>

@@ -15,13 +15,13 @@ const STEPS = [
     number: '2',
     title: 'Print or display your QR code',
     description:
-      'Put it on a table tent, a presentation slide, a poster, or a TV screen. One scan is all anyone needs — no link to copy, no password to share.',
+      'Put it on a table tent, a slide, a poster, or a TV screen. One scan is all anyone needs — no link to copy, no password to share.',
   },
   {
     number: '3',
     title: "Open a session when you're ready",
     description:
-      'Hit "Go live" in your dashboard. The room is now active. Anyone who scans the QR joins instantly with an anonymous nickname — no app, no signup.',
+      'Hit "Go live" in your dashboard. The room is now active. Anyone who scans joins instantly with an anonymous nickname — no app, no signup.',
   },
   {
     number: '4',
@@ -62,7 +62,7 @@ export function HowItWorksSection() {
           {STEPS.slice(0, 3).map((step) => (
             <div
               key={step.number}
-              className="flex gap-8 px-8 py-8 border-b border-border last:border-b-0 md:border-r"
+              className="px-8 py-8 border-b border-border last:border-b-0 md:border-r"
             >
               <StepCard
                 number={step.number}
@@ -73,12 +73,12 @@ export function HowItWorksSection() {
           ))}
         </div>
 
-        {/* Right column: steps 4–5 + decorative card */}
+        {/* Right column: steps 4–5 + decorative */}
         <div className="flex flex-col">
           {STEPS.slice(3).map((step) => (
             <div
               key={step.number}
-              className="flex gap-8 px-8 py-8 border-b border-border last:border-b-0"
+              className="px-8 py-8 border-b border-border"
             >
               <StepCard
                 number={step.number}
@@ -88,16 +88,16 @@ export function HowItWorksSection() {
             </div>
           ))}
 
-          {/* Decorative card — uses QrCode from Lucide */}
+          {/* Decorative card — text-[20px]/text-[16px] matching design system */}
           <div className="flex-1 px-8 py-8 flex items-center justify-center">
-            <div className="rounded-lg bg-background/70 backdrop-blur-[6px] border border-border p-6 w-full max-w-[280px] text-center">
-              <div className="flex justify-center mb-4">
-                <QrCode className="w-[40px] h-[40px] text-muted-foreground" strokeWidth={1} />
+            <div className="rounded-lg bg-background/70 backdrop-blur-[6px] border border-border p-8 w-full max-w-[280px] text-center">
+              <div className="flex justify-center mb-5">
+                <QrCode className="w-10 h-10 text-muted-foreground" strokeWidth={1} />
               </div>
-              <p className="text-[14px] leading-[22px] font-semibold mb-1">
+              <p className="text-[20px] leading-[30px] font-semibold mb-2">
                 Your QR code is permanent
               </p>
-              <p className="text-[13px] leading-[20px] text-muted-foreground">
+              <p className="text-[16px] leading-[24px] text-muted-foreground">
                 Print it once. Every scan opens a brand new temporary chat room.
               </p>
             </div>
