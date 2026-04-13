@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { X, QrCode, Loader2 } from 'lucide-react';
+import { X, QrCode, Loader2, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const COLORS = ['#7C3AED','#2563EB','#0891B2','#059669','#D97706','#DC2626'];
