@@ -10,6 +10,23 @@ const nextConfig = {
       { protocol: 'https', hostname: '*.replit.dev' },
     ],
   },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        ignored: [
+          '**/.git/**',
+          '**/.local/**',
+          '**/.cache/**',
+          '**/.agents/**',
+          '**/node_modules/**',
+          '**/.next/**',
+        ],
+        aggregateTimeout: 300,
+        poll: false,
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
