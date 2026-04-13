@@ -54,14 +54,3 @@ export async function signInWithGithub() {
   }
 }
 
-export async function loginAnonymously(): Promise<{ error: string } | undefined> {
-  const supabase = await createClient();
-  const { error } = await supabase.auth.signInAnonymously();
-
-  if (error) {
-    return { error: error.message };
-  }
-
-  revalidatePath('/', 'layout');
-  redirect('/dashboard');
-}
