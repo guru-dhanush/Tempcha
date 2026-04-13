@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: parsed.error.errors[0].message }, { status: 400 });
     }
 
-    const { name, description, welcomeMessage, duration, color, autoOpenHour, autoCloseHour } = parsed.data;
+    const { name, description, welcomeMessage, duration, color, autoOpenHour, autoCloseHour, roomType, retentionPolicy } = parsed.data;
 
     // Resolve plan
     const { data: sub } = await supabase
@@ -56,6 +56,8 @@ export async function POST(req: Request) {
         max_participants: limits.maxParticipants,
         auto_open_hour: autoOpenHour ?? null,
         auto_close_hour: autoCloseHour ?? null,
+        room_type: roomType ?? 'group',
+        retention_policy: retentionPolicy ?? 'ephemeral',
       })
       .select()
       .single();

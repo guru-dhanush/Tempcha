@@ -8,6 +8,8 @@ export const createRoomSchema = z.object({
   color: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid color'),
   autoOpenHour: z.number().min(0).max(23).nullable().optional(),
   autoCloseHour: z.number().min(0).max(23).nullable().optional(),
+  roomType: z.enum(['group', 'private', 'hybrid']).optional(),
+  retentionPolicy: z.enum(['ephemeral', '24h', '7d', 'permanent']).optional(),
 });
 
 export const updateRoomSchema = createRoomSchema.partial().extend({

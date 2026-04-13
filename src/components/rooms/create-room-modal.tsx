@@ -21,6 +21,8 @@ const DEFAULT_VALUES: RoomFormValues = {
   color: ROOM_COLORS[0],
   autoOpenHour: null,
   autoCloseHour: null,
+  roomType: 'group',
+  retentionPolicy: 'ephemeral',
 };
 
 interface Props {
@@ -53,6 +55,8 @@ export function CreateRoomModal({ onClose, onCreated }: Props) {
           color: values.color,
           autoOpenHour: values.autoOpenHour,
           autoCloseHour: values.autoCloseHour,
+          roomType: values.roomType,
+          retentionPolicy: values.retentionPolicy,
         }),
       });
       const data = await res.json();

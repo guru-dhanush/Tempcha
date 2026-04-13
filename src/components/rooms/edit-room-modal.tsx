@@ -52,6 +52,8 @@ export function EditRoomModal({ room, onClose, onUpdated }: Props) {
           color: values.color,
           autoOpenHour: values.autoOpenHour,
           autoCloseHour: values.autoCloseHour,
+          roomType: values.roomType,
+          retentionPolicy: values.retentionPolicy,
         }),
       });
       const data = await res.json() as { room?: Room; error?: string };
