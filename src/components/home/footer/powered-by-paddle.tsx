@@ -13,19 +13,19 @@ export function PoweredByPaddle() {
         }
       >
         <div className={'flex justify-center items-center gap-2'}>
-          <span className={'text-sm leading-[14px]'}>A Next.js template by</span>
+          <span className={'text-sm leading-[14px]'}>© 2025 FlashRoom · Billing powered by</span>
           <Image src={'/assets/icons/logo/paddle-white-logo.svg'} alt={'Paddle logo'} width={54} height={14} />
         </div>
         <div className={'flex justify-center items-center gap-2 flex-wrap md:flex-nowrap'}>
-          <Link className={'text-sm leading-[14px]'} href={'https://paddle.com'} target={'_blank'}>
+          <Link className={'text-sm leading-[14px]'} href={'/login'}>
             <span className={'flex items-center gap-1'}>
-              Explore Paddle
+              Sign in
               <ArrowUpRight className={'h-4 w-4'} />
             </span>
           </Link>
-          <Link className={'text-sm leading-[14px]'} href={'https://www.paddle.com/legal/terms'} target={'_blank'}>
+          <Link className={'text-sm leading-[14px]'} href={'/signup'}>
             <span className={'flex items-center gap-1'}>
-              Terms of use
+              Get started free
               <ArrowUpRight className={'h-4 w-4'} />
             </span>
           </Link>

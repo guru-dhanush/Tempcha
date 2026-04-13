@@ -6,16 +6,29 @@ import { Toaster } from '@/components/ui/toaster';
 import { Toaster as Sonner } from 'sonner';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://paddle-billing.vercel.app'),
-  title: 'AeroEdit',
-  description: 'AeroEdit is a powerful team design collaboration app and image editor. With plans for businesses of all sizes, streamline your workflow with real-time collaboration, advanced editing tools, and seamless project management.',
+  metadataBase: new URL('https://flashroom.io'),
+  title: 'FlashRoom — QR-Powered Temporary Chat for Businesses',
+  description:
+    'One permanent QR code. Instant anonymous group chat. Zero data retained when the session ends. No app, no signup — just scan and chat.',
   manifest: '/manifest.json',
-  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: 'FlashRoom' },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'FlashRoom',
+  },
+  openGraph: {
+    title: 'FlashRoom — Scan. Chat. Disappear.',
+    description:
+      'One permanent QR code that opens a fresh, anonymous chat room every session. Built for restaurants, events, hotels and anywhere people need to talk.',
+    siteName: 'FlashRoom',
+  },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className="min-h-full dark">
+    <html lang="en" className={'min-h-full dark'}>
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#7C3AED" />

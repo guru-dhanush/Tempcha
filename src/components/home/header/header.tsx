@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { User } from '@supabase/supabase-js';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { Zap } from 'lucide-react';
 
 interface Props {
   user: User | null;
@@ -12,8 +12,11 @@ export default function Header({ user }: Props) {
     <nav>
       <div className="mx-auto max-w-7xl relative px-[32px] py-[18px] flex items-center justify-between">
         <div className="flex flex-1 items-center justify-start">
-          <Link className="flex items-center" href={'/'}>
-            <Image className="w-auto block" src="/logo.svg" width={131} height={28} alt="AeroEdit" />
+          <Link className="flex items-center gap-2" href={'/'}>
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+              <Zap className="w-4 h-4 text-primary-foreground" />
+            </div>
+            <span className="font-semibold text-lg tracking-tight">FlashRoom</span>
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-end">
