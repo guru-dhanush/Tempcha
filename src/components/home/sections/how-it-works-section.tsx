@@ -45,8 +45,8 @@ export function HowItWorksSection() {
     >
       <div className="text-center mb-12 md:mb-16">
         <SectionLabel>Simple from day one</SectionLabel>
-        <SectionHeading>
-          <h2 id="how-it-works-heading">Set up in under five minutes</h2>
+        <SectionHeading id="how-it-works-heading">
+          Set up in under five minutes
         </SectionHeading>
         <div className="flex justify-center">
           <SectionSubtext>

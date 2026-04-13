@@ -65,8 +65,8 @@ export function UseCasesSection() {
     >
       <div className="text-center mb-12 md:mb-16">
         <SectionLabel>Who is Tempcha for?</SectionLabel>
-        <SectionHeading>
-          <h2 id="use-cases-heading">Any place people need to talk — fast</h2>
+        <SectionHeading id="use-cases-heading">
+          Any place people need to talk — fast
         </SectionHeading>
         <div className="flex justify-center">
           <SectionSubtext>

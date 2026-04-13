@@ -1,0 +1,62 @@
+intercept-console-error.js:57 In HTML, <h2> cannot be a child of <h2>.
+This will cause a hydration error.
+
+  ...
+    <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+      <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+        <RedirectBoundary>
+          <RedirectErrorBoundary router={{...}}>
+            <InnerLayoutRouter url="/" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+              <SegmentViewNode type="page" pagePath="page.tsx">
+                <SegmentTrieNode>
+                <Home>
+                  <HomePage>
+                    <LocalizationBanner>
+                    <div>
+                      <HomePageBackground>
+                      <Header>
+                      <HeroSection>
+                      <ExplainerSection>
+                      <_c>
+                      <div id="use-cases">
+                        <UseCasesSection>
+                          <section aria-labelledby="use-cases-..." className="mx-auto ma...">
+                            <div className="text-cente...">
+                              <SectionLabel>
+                              <SectionHeading>
+>                               <h2
+>                                 className={"text-[36px] leading-[40px] md:text-[56px] md:leading-[60px] tracking-[-..."}
+>                               >
+>                                 <h2 id="use-cases-heading">
+                              ...
+                            ...
+                      ...
+              ...
+            ...
+
+error @ intercept-console-error.js:57Understand this error
+intercept-console-error.js:57 <h2> cannot contain a nested <h2>.
+See this log for the ancestor stack trace.
+error @ intercept-console-error.js:57Understand this error
+react-dom-client.development.js:4506 Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+    at throwOnHydrationMismatch (react-dom-client.development.js:4506:11)
+    at beginWork (react-dom-client.development.js:11107:17)
+    at runWithFiberInDEV (react-dom-client.development.js:872:30)
+    at performUnitOfWork (react-dom-client.development.js:15727:22)
+    at workLoopSync (react-dom-client.development.js:15547:41)
+    at renderRootSync (react-dom-client.development.js:15527:11)
+    at performWorkOnRoot (react-dom-client.development.js:14991:13)
+    at performSyncWorkOnRoot (react-dom-client.development.js:16831:7)
+    at flushSyncWorkAcrossRoots_impl (react-dom-client.development.js:16677:21)
+    at processRootScheduleInMicrotask (react-dom-client.development.js:16715:9)
+    at eval (react-dom-client.development.js:16850:13)

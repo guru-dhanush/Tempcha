@@ -40,8 +40,8 @@ export function TrustSection() {
     >
       <div className="text-center mb-12 md:mb-16">
         <SectionLabel>Built on privacy</SectionLabel>
-        <SectionHeading>
-          <h2 id="trust-heading">Nothing is stored. Not even a little.</h2>
+        <SectionHeading id="trust-heading">
+          Nothing is stored. Not even a little.
         </SectionHeading>
         <div className="flex justify-center">
           <SectionSubtext>
