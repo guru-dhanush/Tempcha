@@ -243,48 +243,85 @@ comment on column public.conversation_messages.read_at  is 'Set when the other p
 -- 3. CHECK CONSTRAINTS
 -- ─────────────────────────────────────────────────────────────────────────────
 
--- rooms
-alter table public.rooms
-  add constraint if not exists rooms_name_not_empty
-    check (char_length(trim(name)) > 0),
-  add constraint if not exists rooms_name_max_length
-    check (char_length(name) <= 60),
-  add constraint if not exists rooms_brand_color_hex
-    check (brand_color ~ '^#[0-9A-Fa-f]{6}$'),
-  add constraint if not exists rooms_duration_range
-    check (session_duration_minutes between 15 and 720),
-  add constraint if not exists rooms_auto_open_range
-    check (auto_open_hour  is null or auto_open_hour  between 0 and 23),
-  add constraint if not exists rooms_auto_close_range
-    check (auto_close_hour is null or auto_close_hour between 0 and 23),
-  add constraint if not exists rooms_max_participants_range
-    check (max_participants between 1 and 1000);
+-- Wrapped in DO blocks — safe to re-run on existing databases
+do $$ begin
 
--- sessions
-alter table public.sessions
-  add constraint if not exists sessions_closes_after_opens
-    check (closes_at > opened_at);
+  -- rooms
+  if not exists (select 1 from pg_constraint where conname = 'rooms_name_not_empty') then
+    alter table public.rooms add constraint rooms_name_not_empty
+      check (char_length(trim(name)) > 0);
+  end if;
 
--- messages
-alter table public.messages
-  add constraint if not exists messages_content_not_empty
-    check (char_length(trim(content)) > 0),
-  add constraint if not exists messages_content_max_length
-    check (char_length(content) <= 500);
+  if not exists (select 1 from pg_constraint where conname = 'rooms_name_max_length') then
+    alter table public.rooms add constraint rooms_name_max_length
+      check (char_length(name) <= 60);
+  end if;
 
--- participants
-alter table public.participants
-  add constraint if not exists participants_alias_length
-    check (char_length(alias) between 1 and 40),
-  add constraint if not exists participants_token_min_length
-    check (char_length(token) >= 16);
+  if not exists (select 1 from pg_constraint where conname = 'rooms_brand_color_hex') then
+    alter table public.rooms add constraint rooms_brand_color_hex
+      check (brand_color ~ '^#[0-9A-Fa-f]{6}$');
+  end if;
 
--- conversation_messages
-alter table public.conversation_messages
-  add constraint if not exists conv_messages_content_not_empty
-    check (char_length(trim(content)) > 0),
-  add constraint if not exists conv_messages_content_max_length
-    check (char_length(content) <= 500);
+  if not exists (select 1 from pg_constraint where conname = 'rooms_duration_range') then
+    alter table public.rooms add constraint rooms_duration_range
+      check (session_duration_minutes between 15 and 720);
+  end if;
+
+  if not exists (select 1 from pg_constraint where conname = 'rooms_auto_open_range') then
+    alter table public.rooms add constraint rooms_auto_open_range
+      check (auto_open_hour is null or auto_open_hour between 0 and 23);
+  end if;
+
+  if not exists (select 1 from pg_constraint where conname = 'rooms_auto_close_range') then
+    alter table public.rooms add constraint rooms_auto_close_range
+      check (auto_close_hour is null or auto_close_hour between 0 and 23);
+  end if;
+
+  if not exists (select 1 from pg_constraint where conname = 'rooms_max_participants_range') then
+    alter table public.rooms add constraint rooms_max_participants_range
+      check (max_participants between 1 and 1000);
+  end if;
+
+  -- sessions
+  if not exists (select 1 from pg_constraint where conname = 'sessions_closes_after_opens') then
+    alter table public.sessions add constraint sessions_closes_after_opens
+      check (closes_at > opened_at);
+  end if;
+
+  -- messages
+  if not exists (select 1 from pg_constraint where conname = 'messages_content_not_empty') then
+    alter table public.messages add constraint messages_content_not_empty
+      check (char_length(trim(content)) > 0);
+  end if;
+
+  if not exists (select 1 from pg_constraint where conname = 'messages_content_max_length') then
+    alter table public.messages add constraint messages_content_max_length
+      check (char_length(content) <= 500);
+  end if;
+
+  -- participants
+  if not exists (select 1 from pg_constraint where conname = 'participants_alias_length') then
+    alter table public.participants add constraint participants_alias_length
+      check (char_length(alias) between 1 and 40);
+  end if;
+
+  if not exists (select 1 from pg_constraint where conname = 'participants_token_min_length') then
+    alter table public.participants add constraint participants_token_min_length
+      check (char_length(token) >= 16);
+  end if;
+
+  -- conversation_messages
+  if not exists (select 1 from pg_constraint where conname = 'conv_messages_content_not_empty') then
+    alter table public.conversation_messages add constraint conv_messages_content_not_empty
+      check (char_length(trim(content)) > 0);
+  end if;
+
+  if not exists (select 1 from pg_constraint where conname = 'conv_messages_content_max_length') then
+    alter table public.conversation_messages add constraint conv_messages_content_max_length
+      check (char_length(content) <= 500);
+  end if;
+
+end $$;
 
 
 -- ─────────────────────────────────────────────────────────────────────────────
