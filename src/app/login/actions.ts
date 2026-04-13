@@ -2,48 +2,66 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
 
 interface FormData {
   email: string;
   password: string;
 }
-export async function login(data: FormData) {
+
+export type LoginError =
+  | 'invalid_credentials'
+  | 'email_not_confirmed'
+  | 'too_many_requests'
+  | 'unknown';
+
+export async function login(data: FormData): Promise<{ error: LoginError } | undefined> {
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    return { error: true };
+    if (error.message.toLowerCase().includes('invalid login credentials') || error.code === 'invalid_credentials') {
+      return { error: 'invalid_credentials' };
+    }
+    if (error.message.toLowerCase().includes('email not confirmed') || error.code === 'email_not_confirmed') {
+      return { error: 'email_not_confirmed' };
+    }
+    if (error.status === 429 || error.message.toLowerCase().includes('rate limit')) {
+      return { error: 'too_many_requests' };
+    }
+    return { error: 'unknown' };
   }
 
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/dashboard');
 }
 
 export async function signInWithGithub() {
   const supabase = await createClient();
+  const headersList = await headers();
+  const host = headersList.get('host') ?? 'localhost:5000';
+  const protocol = host.includes('localhost') ? 'http' : 'https';
+  const redirectTo = `${protocol}://${host}/auth/callback`;
+
   const { data } = await supabase.auth.signInWithOAuth({
     provider: 'github',
-    options: {
-      redirectTo: `https://paddle-billing.vercel.app/auth/callback`,
-    },
+    options: { redirectTo },
   });
+
   if (data.url) {
     redirect(data.url);
   }
 }
 
-export async function loginAnonymously() {
+export async function loginAnonymously(): Promise<{ error: string } | undefined> {
   const supabase = await createClient();
-  const { error: signInError } = await supabase.auth.signInAnonymously();
-  const { error: updateUserError } = await supabase.auth.updateUser({
-    email: `aeroedit+${Date.now().toString(36)}@paddle.com`,
-  });
+  const { error } = await supabase.auth.signInAnonymously();
 
-  if (signInError || updateUserError) {
-    return { error: true };
+  if (error) {
+    return { error: error.message };
   }
 
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/dashboard');
 }
