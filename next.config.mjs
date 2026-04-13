@@ -3,7 +3,12 @@ const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   images: {
-    domains: ['cdn.simpleicons.org', 'localhost', 'paddle-billing.vercel.app'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'cdn.simpleicons.org' },
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'https', hostname: 'paddle-billing.vercel.app' },
+      { protocol: 'https', hostname: '*.replit.dev' },
+    ],
   },
 };
 
