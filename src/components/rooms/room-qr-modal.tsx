@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { X, Download, ExternalLink, Copy, Check } from 'lucide-react';
+import { X, Download, ExternalLink, Copy, Check, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import QRCode from 'qrcode';
