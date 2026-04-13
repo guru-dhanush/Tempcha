@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Check, ChevronDown, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -50,11 +52,16 @@ export function HeroSection() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
-          <Button asChild variant="secondary" size="lg">
-            <a href="#how-it-works" className="flex items-center gap-2">
-              See how it works
-              <ChevronDown className="w-4 h-4" />
-            </a>
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={() => {
+              document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            See how it works
+            <ChevronDown className="w-4 h-4" />
           </Button>
         </div>
 

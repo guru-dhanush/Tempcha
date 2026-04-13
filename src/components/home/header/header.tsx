@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { User } from '@supabase/supabase-js';
 import { Button } from '@/components/ui/button';
@@ -21,15 +23,19 @@ export default function Header({ user }: Props) {
 
         {/* Nav links */}
         <div className="hidden md:flex flex-1 items-center justify-center gap-8">
-          <a href="#how-it-works" className="text-[14px] text-muted-foreground hover:text-foreground transition-colors">
-            How it works
-          </a>
-          <a href="#use-cases" className="text-[14px] text-muted-foreground hover:text-foreground transition-colors">
-            Use cases
-          </a>
-          <a href="#pricing" className="text-[14px] text-muted-foreground hover:text-foreground transition-colors">
-            Pricing
-          </a>
+          {[
+            { label: 'How it works', id: 'how-it-works' },
+            { label: 'Use cases',    id: 'use-cases'    },
+            { label: 'Pricing',      id: 'pricing'      },
+          ].map(({ label, id }) => (
+            <button
+              key={id}
+              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              className="text-[14px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer bg-transparent border-none p-0"
+            >
+              {label}
+            </button>
+          ))}
         </div>
 
         <div className="flex flex-1 items-center justify-end">
