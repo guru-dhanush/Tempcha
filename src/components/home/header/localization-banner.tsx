@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { CountryDropdown } from '@/components/home/header/country-dropdown';
-import { ArrowUpRight, X } from 'lucide-react';
+import { ArrowUpRight, X, Megaphone } from 'lucide-react';
 import { useState } from 'react';
 
 interface Props {
@@ -17,19 +17,21 @@ export function LocalizationBanner({ country, onCountryChange }: Props) {
   return (
     <div className="hidden md:flex border-border/50 border-b-2 bg-background">
       <div className="flex flex-1 justify-center items-center p-2 gap-8">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <Megaphone className="w-4 h-4 text-muted-foreground shrink-0" />
           <p className="text-[14px] font-medium">
-            🎉 Tempcha is now live — the temporary chat application for businesses
+            Tempcha is now live — the temporary chat application for businesses
           </p>
-          <Link className="text-[14px] text-muted-foreground" href="/signup">
+          <Link className="text-[14px] text-muted-foreground hover:text-foreground transition-colors" href="/signup">
             <span className="flex items-center gap-1">
-              Start for free <ArrowUpRight className="h-4 w-4" />
+              Start for free
+              <ArrowUpRight className="h-4 w-4" />
             </span>
           </Link>
         </div>
         <div className="flex items-center gap-4">
           <CountryDropdown country={country} onCountryChange={onCountryChange} />
-          <X size={16} className="cursor-pointer" onClick={() => setShow(false)} />
+          <X size={16} className="cursor-pointer text-muted-foreground hover:text-foreground transition-colors" onClick={() => setShow(false)} />
         </div>
       </div>
     </div>

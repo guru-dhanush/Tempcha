@@ -1,30 +1,37 @@
+import { UserX, ServerCrash, ShieldOff } from 'lucide-react';
 import { TrustPillar } from '@/components/home/sections/trust-pillar';
 import { SectionLabel } from '@/components/home/sections/section-label';
 import { SectionHeading } from '@/components/home/sections/section-heading';
 import { SectionSubtext } from '@/components/home/sections/section-subtext';
+import { type LucideIcon } from 'lucide-react';
 
-const PILLARS = [
+interface Pillar {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+const PILLARS: Pillar[] = [
   {
-    icon: '👤',
+    icon: UserX,
     title: 'No account needed',
-    description: 'Participants never create an account, enter an email, or download an app. Scan and chat in under five seconds.',
+    description:
+      'Participants never create an account, enter an email, or download an app. Scan and chat in under five seconds.',
   },
   {
-    icon: '🗑️',
+    icon: ServerCrash,
     title: 'No permanent storage',
-    description: 'Messages live only in memory during the session. When you close the room, they are deleted from our servers forever — not archived, not anonymised. Gone.',
+    description:
+      'Messages live only in memory during the session. When you close the room, they are deleted from our servers forever — not archived, not anonymised. Gone.',
   },
   {
-    icon: '🔒',
+    icon: ShieldOff,
     title: 'No tracking',
-    description: 'We do not track participants across sessions. We do not sell data. We do not build profiles. A chat room is a conversation, not a database.',
+    description:
+      'We do not track participants across sessions. We do not sell data. We do not build profiles. A chat room is a conversation, not a database.',
   },
-] as const;
+];
 
-/**
- * Privacy and trust section.
- * SEO: anonymous temporary chat, no signup chat room, private group chat, delete messages automatically
- */
 export function TrustSection() {
   return (
     <section
@@ -34,13 +41,13 @@ export function TrustSection() {
       <div className="text-center mb-12 md:mb-16">
         <SectionLabel>Built on privacy</SectionLabel>
         <SectionHeading>
-          <h2 id="trust-heading">
-            Nothing is stored. Not even a little.
-          </h2>
+          <h2 id="trust-heading">Nothing is stored. Not even a little.</h2>
         </SectionHeading>
         <div className="flex justify-center">
           <SectionSubtext>
-            Most temporary chat applications say they delete messages. Tempcha is built so that it is architecturally impossible to retrieve them — because they are never written to disk in the first place.
+            Most temporary chat applications say they delete messages. Tempcha is built so that it
+            is architecturally impossible to retrieve them — because they are never written to disk
+            in the first place.
           </SectionSubtext>
         </div>
       </div>

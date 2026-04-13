@@ -88,7 +88,7 @@ export function CreateRoomModal({ onClose, onCreated }: Props) {
           <div className="border-t border-border pt-4">
             <button type="button" onClick={() => setShowSchedule(!showSchedule)}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
-              <span className={`text-xs transition-transform ${showSchedule ? 'rotate-90' : ''}`}>▶</span>
+              <ChevronRight className={`w-3.5 h-3.5 transition-transform ${showSchedule ? 'rotate-90' : ''}`} />
               Auto-schedule sessions (optional)
             </button>
 

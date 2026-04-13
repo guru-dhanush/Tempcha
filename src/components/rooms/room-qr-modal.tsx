@@ -113,7 +113,7 @@ export function RoomQRModal({ room, onClose }: Props) {
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center"
                 style={{ background: room.brand_color }}>
-                <span className="text-white text-lg">⚡</span>
+                <Zap className="w-4 h-4 text-white" />
               </div>
             </div>
           </div>

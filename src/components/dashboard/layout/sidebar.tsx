@@ -1,6 +1,6 @@
 'use client';
 
-import { Album, CreditCard, Home } from 'lucide-react';
+import { LayoutDashboard, QrCode, Zap, CreditCard } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -8,17 +8,22 @@ import { cn } from '@/lib/utils';
 const sidebarItems = [
   {
     title: 'Dashboard',
-    icon: <Home className="h-6 w-6" />,
+    icon: <LayoutDashboard className="h-5 w-5" />,
     href: '/dashboard',
   },
   {
+    title: 'My Rooms',
+    icon: <QrCode className="h-5 w-5" />,
+    href: '/dashboard/rooms',
+  },
+  {
     title: 'Subscriptions',
-    icon: <Album className="h-6 w-6" />,
+    icon: <Zap className="h-5 w-5" />,
     href: '/dashboard/subscriptions',
   },
   {
     title: 'Payments',
-    icon: <CreditCard className="h-6 w-6" />,
+    icon: <CreditCard className="h-5 w-5" />,
     href: '/dashboard/payments',
   },
 ];
@@ -26,16 +31,24 @@ const sidebarItems = [
 export function Sidebar() {
   const pathname = usePathname();
   return (
-    <nav className="flex flex-col grow justify-between items-start px-2 text-sm font-medium lg:px-4">
-      <div className={'w-full'}>
+    <nav
+      aria-label="Dashboard navigation"
+      className="flex flex-col grow justify-between items-start px-2 text-sm font-medium lg:px-4"
+    >
+      <div className="w-full">
         {sidebarItems.map((item) => (
           <Link
             key={item.title}
             href={item.href}
-            className={cn('flex items-center text-base gap-3 px-4 py-3 rounded-xxs dashboard-sidebar-items', {
-              'dashboard-sidebar-items-active':
-                item.href === '/dashboard' ? pathname === item.href : pathname.includes(item.href),
-            })}
+            className={cn(
+              'flex items-center text-base gap-3 px-4 py-3 rounded-xxs dashboard-sidebar-items',
+              {
+                'dashboard-sidebar-items-active':
+                  item.href === '/dashboard'
+                    ? pathname === item.href
+                    : pathname.includes(item.href),
+              },
+            )}
           >
             {item.icon}
             {item.title}

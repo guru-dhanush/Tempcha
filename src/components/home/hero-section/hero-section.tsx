@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Check, ChevronDown, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 /**
@@ -19,7 +20,6 @@ export function HeroSection() {
       className="mx-auto max-w-7xl px-[32px] relative flex items-center justify-between mt-16 mb-12"
     >
       <div className="text-center w-full">
-        {/* SEO: exact-match keyword phrase in visible text */}
         <p className="text-[13px] leading-[20px] font-medium tracking-[0.1em] uppercase text-muted-foreground mb-6">
           The temporary chat application for businesses
         </p>
@@ -33,7 +33,6 @@ export function HeroSection() {
           Gone forever.
         </h1>
 
-        {/* SEO: natural keyword density in description */}
         <p className="mt-6 text-[18px] leading-[27px] md:text-[20px] md:leading-[30px] text-muted-foreground max-w-2xl mx-auto">
           Tempcha is a free temporary chat room you open with a QR code.
           No app. No account. Anonymous by default.
@@ -42,20 +41,35 @@ export function HeroSection() {
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button asChild size="lg">
-            <Link href="/signup">Start for free</Link>
+            <Link href="/signup" className="flex items-center gap-2">
+              Start for free
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </Button>
           <Button asChild variant="secondary" size="lg">
-            <a href="#how-it-works">See how it works ↓</a>
+            <a href="#how-it-works" className="flex items-center gap-2">
+              See how it works
+              <ChevronDown className="w-4 h-4" />
+            </a>
           </Button>
         </div>
 
         {/* Social proof strip */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-[13px] text-muted-foreground">
-          <span>✓ No credit card required</span>
+          <span className="flex items-center gap-1.5">
+            <Check className="w-3.5 h-3.5" strokeWidth={2.5} />
+            No credit card required
+          </span>
           <span className="hidden sm:inline text-border">|</span>
-          <span>✓ Works on any phone with a camera</span>
+          <span className="flex items-center gap-1.5">
+            <Check className="w-3.5 h-3.5" strokeWidth={2.5} />
+            Works on any phone with a camera
+          </span>
           <span className="hidden sm:inline text-border">|</span>
-          <span>✓ Live in under 5 minutes</span>
+          <span className="flex items-center gap-1.5">
+            <Check className="w-3.5 h-3.5" strokeWidth={2.5} />
+            Live in under 5 minutes
+          </span>
         </div>
       </div>
     </section>
